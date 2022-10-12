@@ -30,4 +30,4 @@ and hitting enter.
 
 
 **Do not open calculator before opening Roblox or you will BSOD lmao.**
-https://gyazo.com/636d347bd68892ed41910de557badb7a
+[img]https://gyazo.com/636d347bd68892ed41910de557badb7a[/img]
