@@ -30,4 +30,4 @@ and hitting enter.
 
 
 **Do not open calculator before opening Roblox or you will BSOD lmao.**
-![gif of driver](https://i.gyazo.com/636d347bd68892ed41910de557badb7a.mp4)
+![gif of driver](https://i.gyazo.com/636d347bd68892ed41910de557badb7a.gif)
