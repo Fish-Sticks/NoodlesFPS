@@ -1,0 +1,87 @@
+;
+; NoodlesFPS.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Noodles ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=NoodlesFPS.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+PnpLockDown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+NoodlesFPS_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+NoodlesFPS.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%NoodlesFPS.DeviceDesc%=NoodlesFPS_Device, Root\NoodlesFPS ; TODO: edit hw-id
+
+[NoodlesFPS_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+NoodlesFPS.sys
+
+;-------------- Service installation
+[NoodlesFPS_Device.NT.Services]
+AddService = NoodlesFPS,%SPSVCINST_ASSOCSERVICE%, NoodlesFPS_Service_Inst
+
+; -------------- NoodlesFPS driver install sections
+[NoodlesFPS_Service_Inst]
+DisplayName    = %NoodlesFPS.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\NoodlesFPS.sys
+
+;
+;--- NoodlesFPS_Device Coinstaller installation ------
+;
+
+[NoodlesFPS_Device.NT.CoInstallers]
+AddReg=NoodlesFPS_Device_CoInstaller_AddReg
+CopyFiles=NoodlesFPS_Device_CoInstaller_CopyFiles
+
+[NoodlesFPS_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[NoodlesFPS_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[NoodlesFPS_Device.NT.Wdf]
+KmdfService =  NoodlesFPS, NoodlesFPS_wdfsect
+[NoodlesFPS_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="fishysNudes" ;TODO: Replace with your manufacturer name
+ClassName="Noodles" ; TODO: edit ClassName
+DiskName = "NoodlesFPS Installation Disk"
+NoodlesFPS.DeviceDesc = "NoodlesFPS Device"
+NoodlesFPS.SVCDESC = "NoodlesFPS Service"
