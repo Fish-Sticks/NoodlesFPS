@@ -16,7 +16,7 @@ Open command prompt as admin and type
 and then restart your computer.
 
 Once restarted, open command prompt as admin and type
-"sc create NoodlesFPS type=kernel binPath="{PATH_HERE}\NoodlesFPS.sys"
+sc create NoodlesFPS type=kernel binPath="{PATH_HERE}\NoodlesFPS.sys"
 
 
 # Usage:
