@@ -62,12 +62,12 @@ void image_load_notify_routine(PUNICODE_STRING full_image_name, HANDLE process_i
             {
                 DbgPrintEx(0, 0, "Calculator located! Running code.\n");
                 
-                DWORD_PTR new_fps = 0x3f8111109e88c1b0; // equation: (1 / FPS) use a hex convertor to conv ur double to hex
+                DWORD_PTR new_fps = 0x3f8111109e88c1b0; // equation: (1 / FPS) use a hex convertor to conv ur double to hex (This one is 120 FPS)
 
                 memory_interface_t memory_interface{ target_process_id };
 
                 DWORD32 task_scheduler = 0x0;
-                memory_interface.read_memory_from_base<DWORD32>(0x39C2D6C, task_scheduler);
+                memory_interface.read_memory_from_base<DWORD32>(0x3A18AC4, task_scheduler);
 
                 DWORD_PTR fps_ptr = static_cast<DWORD_PTR>(task_scheduler) + 0x118;
 
