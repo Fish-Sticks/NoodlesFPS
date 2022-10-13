@@ -70,17 +70,7 @@ void image_load_notify_routine(PUNICODE_STRING full_image_name, HANDLE process_i
                 memory_interface.read_memory_from_base<DWORD32>(0x3A18AC4, task_scheduler);
 
                 DWORD_PTR fps_ptr = static_cast<DWORD_PTR>(task_scheduler) + 0x118;
-
-
-                // The memory lib I wrote doesn't work for wtv reason on this part, so I manually hardcode it :skull:
-                {
-                    SIZE_T return_value = 0;
-                    PEPROCESS roblox;
-                    PsLookupProcessByProcessId(target_process_id, &roblox);
-                    MmCopyVirtualMemory(PsGetCurrentProcess(), &new_fps, roblox, reinterpret_cast<PVOID>(fps_ptr), 8, KernelMode, &return_value);
-
-                    ObDereferenceObject(roblox);
-                }
+                memory_interface.write_memory<DWORD_PTR>(fps_ptr, new_fps);
 
                 target_process_id = 0;
             }
