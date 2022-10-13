@@ -97,8 +97,6 @@ VOID DriverUnload(
     _In_ struct _DRIVER_OBJECT* DriverObject
 )
 {
-    // Won't actually work "If the driver's callback routine is currently running, PsRemoveLoadImageNotifyRoutine waits until the callback routine exits before removing it. Therefore, the callback routine itself must not call PsRemoveLoadImageNotifyRoutine."
-    // I don't care that much though, leave it as an exercise for you!
     NTSTATUS status = PsRemoveLoadImageNotifyRoutine(&image_load_notify_routine);
 
     if (NT_SUCCESS(status))
