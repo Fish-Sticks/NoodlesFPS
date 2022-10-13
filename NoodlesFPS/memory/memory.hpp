@@ -44,9 +44,9 @@ public:
     }
 
     template <typename T>
-    NTSTATUS write_memory(DWORD_PTR address, T& output)
+    NTSTATUS write_memory(DWORD_PTR address, T& input)
     {
-        return MmCopyVirtualMemory(this->target_process, reinterpret_cast<PVOID>(address), PsGetCurrentProcess(), &output, sizeof(T), KernelMode, &this->return_size);
+        return MmCopyVirtualMemory(PsGetCurrentProcess(), &input, this->target_process, reinterpret_cast<PVOID>(address), sizeof(T), KernelMode, &this->return_size);
     }
 
     template <typename T>
